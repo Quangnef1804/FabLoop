@@ -1,0 +1,30 @@
+[
+  {
+    "object": "pot1",
+    "method": "l1",
+    "lights": 4,
+    "caveat": "screen_locked_e_core_throttle",
+    "evidence": "Runtime-pass median 468 s (runs 461/475/468) vs 101 s single run in pass 1 (x4.65), while ball and harvest L1 ratios were 0.56-1.04. Screen was locked (LockApp running); L1 is single-threaded (one thread held 10,334 CPU-s of 76) on a hybrid i7-12700H, so Windows moved it off the P-cores. AC power, 100% battery, Balanced plan, no thermal throttle."
+  },
+  {
+    "object": "pot1",
+    "method": "l1",
+    "lights": 32,
+    "caveat": "screen_locked_e_core_throttle",
+    "evidence": "Runtime-pass median 514 s (runs 515/514/514) vs 109 s single run in pass 1 (x4.74); same locked-screen conditions as pot1/l1/4."
+  },
+  {
+    "object": "pot1",
+    "method": "l1",
+    "lights": 96,
+    "caveat": "screen_locked_e_core_throttle",
+    "evidence": "Measured entirely during the same locked-screen period as pot1/l1/4 and pot1/l1/32; started 20:29 and still running at 21:42 against a 741 s single run in pass 1."
+  },
+  {
+    "object": "harvest",
+    "method": "l1",
+    "lights": 96,
+    "caveat": "possible_partial_throttle",
+    "evidence": "Measured runs rise monotonically 875 -> 970 -> 1090 s (IQR/median 11%, the largest spread in the runtime pass), consistent with the throttle beginning during this case. Median 970 s is still within x1.04 of the 935 s pass-1 single run."
+  }
+]

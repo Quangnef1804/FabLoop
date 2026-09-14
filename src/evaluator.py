@@ -269,6 +269,8 @@ def evaluate(
     calibration_record = json.loads(calibration_artifact.read_text(encoding="utf-8"))
     if calibration_record.get("category") != category or int(calibration_record.get("seed", -1)) != seed:
         raise ValueError("Calibration artifact provenance does not match the evaluation run")
+    if calibration_record.get("architecture") != checkpoint.get("architecture"):
+        raise ValueError("Calibration artifact architecture does not match the checkpoint")
     threshold_deployment = _deployment_threshold(
         calibration_record,
         target_fpr,
@@ -501,6 +503,7 @@ def evaluate(
         "created_at": datetime.now(timezone.utc).isoformat(),
         "category": category,
         "seed": seed,
+        "architecture": checkpoint["architecture"],
         "checkpoint_iteration": checkpoint["iteration"],
         "test_passes": 1,
         "test_samples": len(rows),

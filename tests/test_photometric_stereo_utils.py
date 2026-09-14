@@ -8,7 +8,7 @@ import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from fabloop.photometric_stereo.diligent_validate import (
+from photometric_stereo.diligent_validate import (
     coerce_n_by_3_vectors,
     frankot_chellappa,
     mean_angular_error,

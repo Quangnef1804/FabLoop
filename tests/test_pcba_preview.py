@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 from pathlib import Path
+import sys
 import tempfile
 import unittest
 from unittest.mock import patch
@@ -12,10 +13,13 @@ from unittest.mock import patch
 import cv2
 import numpy as np
 
-from src.fabloop.photometric_stereo.pcba_preview import LIGHT_ORDER, NOMINAL_LIGHT_DIRECTIONS, export_preview
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
 
-MODULE = "src.fabloop.photometric_stereo.pcba_preview"
-RPS_ROOT = Path(__file__).resolve().parents[1] / "third-party/RobustPhotometricStereo"
+from photometric_stereo.pcba_preview import LIGHT_ORDER, NOMINAL_LIGHT_DIRECTIONS, export_preview
+
+MODULE = "photometric_stereo.pcba_preview"
+RPS_ROOT = ROOT / "third-party/RobustPhotometricStereo"
 
 
 class PcbaPreviewTests(unittest.TestCase):

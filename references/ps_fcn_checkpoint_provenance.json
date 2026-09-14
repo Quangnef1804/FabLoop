@@ -1,0 +1,38 @@
+{
+  "recorded_at_utc": "2026-09-10T00:00:00+00:00",
+  "artifact": "third-party/PS-FCN/data/models/PS-FCN_B_S_32.pth.tar",
+  "paper": "PS-FCN: A Flexible Learning Framework for Photometric Stereo, Chen et al., ECCV 2018",
+  "official_host_status": {
+    "url_in_upstream_script": "http://www.visionlab.cs.hku.hk/data/PS-FCN/models/PS-FCN_B_S_32.pth.tar",
+    "status": "dead",
+    "evidence": "www.visionlab.cs.hku.hk returns NXDOMAIN from the cs.hku.hk authoritative server (ns1.cs.hku.hk); visionlab.cs.hku.hk resolves to i1.cs.hku.hk 147.8.179.14 but answers 403 for every path including the site root."
+  },
+  "source_used": {
+    "url": "https://huggingface.co/guanyingc/PhotometricStereo_Blobby_Sculpture_Dataset/resolve/main/PS-FCN_B_S_32.pth.tar",
+    "why_trusted": "The HuggingFace account guanyingc belongs to the PS-FCN first author and hosts the same Blobby and Sculpture datasets released with the paper.",
+    "baidu_fallback_not_needed": "README fallback https://pan.baidu.com/s/1WUVu9ibIBh4wM1shTXBuNw?pwd=snyc was not used."
+  },
+  "hashes": {
+    "sha256": "20cb834d908b974e8e2e4233fa4fa17dc809857a325f81f490863993fd97c5b5",
+    "md5": "b9f2ae961461e0216f0d9b6740308760",
+    "size_bytes": 8844076,
+    "published_hash_available": false,
+    "published_hash_note": "Upstream data_md5sum.txt covers only the Blobby and Sculpture datasets, not the model checkpoints, so no publisher hash exists to compare against."
+  },
+  "structural_verification": {
+    "architecture": "PS_FCN(fuse_type='max', batchNorm=False, c_in=6)",
+    "load_state_dict_strict": true,
+    "load_state_dict_result": "pass",
+    "parameter_count": 2210048,
+    "paper_reported_parameter_count": "2.2M"
+  },
+  "reproduction_check": {
+    "object": "ball",
+    "method": "ps_fcn",
+    "lights": 96,
+    "measured_mae_deg": 2.430,
+    "published_mae_deg": 2.82,
+    "published_source": "PS-FCN ECCV 2018 paper, DiLiGenT per-object table",
+    "note": "Measured value is not tuned to any invented tolerance. It differs from the published number partly because this pipeline uses each object's calibrated light_directions.txt, whereas upstream datasets/util.py hardcodes one shared light matrix for every object."
+  }
+}

@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 from pathlib import Path
+import sys
 import tempfile
 import unittest
 
@@ -12,7 +13,10 @@ import cv2
 import numpy as np
 from PIL import Image
 
-from src.fabloop.photometric_stereo.preview_alignment import LIGHT_ORDER, align_lights
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+
+from photometric_stereo.preview_alignment import LIGHT_ORDER, align_lights
 
 
 class PreviewAlignmentTests(unittest.TestCase):

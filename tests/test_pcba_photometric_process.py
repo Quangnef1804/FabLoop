@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 from pathlib import Path
+import sys
 import tempfile
 import unittest
 from unittest.mock import patch
@@ -12,9 +13,12 @@ from unittest.mock import patch
 import cv2
 import numpy as np
 
-from src.fabloop.photometric_stereo.pcba_process import COORDINATE_FRAME, LIGHT_ORDER, process_capture
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
 
-RPS_ROOT = Path(__file__).resolve().parents[1] / "third-party/RobustPhotometricStereo"
+from photometric_stereo.pcba_process import COORDINATE_FRAME, LIGHT_ORDER, process_capture
+
+RPS_ROOT = ROOT / "third-party/RobustPhotometricStereo"
 
 
 class PcbaPhotometricProcessTests(unittest.TestCase):
@@ -68,7 +72,7 @@ class PcbaPhotometricProcessTests(unittest.TestCase):
             ("light_intensities", [[float("nan"), 1, 1]] * 4, "finite"),
             ("ambient_path", "ambient.jpg", "unsupported"),
         ]
-        with patch("src.fabloop.photometric_stereo.pcba_process.import_rps_class") as load_solver:
+        with patch("photometric_stereo.pcba_process.import_rps_class") as load_solver:
             for key, value, message in cases:
                 with self.subTest(key=key, value=value):
                     candidate = dict(self.config)

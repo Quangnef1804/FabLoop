@@ -47,10 +47,12 @@ class DiligentSample:
     light_intensities: np.ndarray | None
     mask: np.ndarray
     normal_gt: np.ndarray
+    source_mask_pixel_count: int | None = None
+    invalid_gt_pixel_count: int = 0
 
 
 def repo_root() -> Path:
-    return Path(__file__).resolve().parents[3]
+    return Path(__file__).resolve().parents[2]
 
 
 def default_baseline_path() -> Path:
@@ -240,8 +242,15 @@ def load_diligent_sample(object_dir: Path, object_name: str | None = None) -> Di
         raise ValueError(f"Mask shape {mask.shape} does not match Normal_gt shape {normal_gt.shape}")
     if not np.any(mask):
         raise ValueError("Object mask is empty")
-    if np.any(np.linalg.norm(normal_gt[mask], axis=-1) <= 1.0e-8):
-        raise ValueError("Ground-truth normals contain zero vectors inside the object mask")
+    source_mask_pixel_count = int(np.count_nonzero(mask))
+    # Pot2 in the official main dataset contains a small number of zero GT
+    # vectors inside mask.png. They cannot define an angle, so retain only the
+    # valid part of the published mask and report the exclusion explicitly.
+    valid_gt = np.linalg.norm(normal_gt, axis=-1) > 1.0e-8
+    invalid_gt_pixel_count = int(np.count_nonzero(mask & ~valid_gt))
+    mask = mask & valid_gt
+    if not np.any(mask):
+        raise ValueError("No valid ground-truth normals remain inside the object mask")
 
     name = normalize_object_name(object_name or object_dir.name)
     return DiligentSample(
@@ -252,6 +261,8 @@ def load_diligent_sample(object_dir: Path, object_name: str | None = None) -> Di
         light_intensities=light_intensities,
         mask=mask,
         normal_gt=normal_gt,
+        source_mask_pixel_count=source_mask_pixel_count,
+        invalid_gt_pixel_count=invalid_gt_pixel_count,
     )
 
 

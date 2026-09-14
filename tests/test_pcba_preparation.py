@@ -4,12 +4,16 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+import sys
 import tempfile
 import unittest
 
 from PIL import Image
 
-from src.fabloop.photometric_stereo.pcba_prepare import LIGHT_ORDER, prepare_inventory, validate_labels
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+
+from photometric_stereo.pcba_prepare import LIGHT_ORDER, prepare_inventory, validate_labels
 
 
 class PcbaPreparationTests(unittest.TestCase):

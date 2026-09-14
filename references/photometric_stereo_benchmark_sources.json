@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "verified_on": "2026-09-10",
+  "dataset": {
+    "name": "DiLiGenT single-view main benchmark",
+    "official_page": "https://sites.google.com/site/photometricstereodata/single",
+    "local_archive": "data/diligent/DiLiGenT.zip",
+    "archive_size_bytes": 891519958,
+    "archive_sha256": "d13f54e1bcd3da9cc19e2ececc5ad1a768784448a7fbb9d4428dc64f86c3e9f9",
+    "objects": ["ball", "bear", "buddha", "cat", "cow", "goblet", "harvest", "pot1", "pot2", "reading"]
+  },
+  "implementations": {
+    "robust_photometric_stereo": {
+      "repository": "https://github.com/yasumat/RobustPhotometricStereo",
+      "commit": "f03aa95b57e746a7d31df76b1c0fa0a83584a3c1",
+      "local_path": "third-party/RobustPhotometricStereo",
+      "usage": ["RPS.L2_SOLVER", "RPS.L1_SOLVER"]
+    },
+    "ps_fcn": {
+      "repository": "https://github.com/guanyingc/PS-FCN",
+      "commit": "00cc18f222ed88cbf0df0a6935c66c60f5ddbf03",
+      "local_path": "third-party/PS-FCN",
+      "official_checkpoint_url": "https://www.visionlab.cs.hku.hk/data/PS-FCN/models/PS-FCN_B_S_32.pth.tar",
+      "official_fallback": "https://pan.baidu.com/s/1WUVu9ibIBh4wM1shTXBuNw?pwd=snyc",
+      "checkpoint_status": "missing: official HKU hostname did not resolve on 2026-09-10; Baidu fallback requires interactive download"
+    },
+    "sdm_unips": {
+      "repository": "https://github.com/satoshi-ikehata/sdm-unips-cvpr2023",
+      "commit": "96e68f353173c2ae85bfe609e4728a19a2f8c92e",
+      "local_path": "third-party/SDM-UniPS",
+      "official_checkpoint_url": "https://www.dropbox.com/s/yu8h6g0zp07mumd/checkpoint.zip?dl=0",
+      "downloaded_archive_sha256": "da8e808cbb52e6ad72d980cc0b0e52279c18a460bad8bf8ffb69387a1ef151f7",
+      "normal_checkpoint": "third-party/SDM-UniPS/checkpoint/normal/nml.pytmodel",
+      "normal_checkpoint_size_bytes": 251176151,
+      "normal_checkpoint_sha256": "100747de145238f40c1ff1e1263ce2bd3d7d7b12d15214a6acba1134ed937bff",
+      "license_note": "Upstream license includes a non-commercial-use restriction."
+    }
+  },
+  "gate": {
+    "protocol": "DiLiGenT Ball, L2, all 96 calibrated and intensity-normalized observations",
+    "measured_mae_deg": 4.289497850836157,
+    "published_baseline_mae_deg": 4.1,
+    "delta_deg": 0.18949785083615733,
+    "relative_delta_pct": 4.621898800881887,
+    "result_path": "outputs/photometric_stereo/pipeline_gate_ball_l2_96/gate_result.json"
+  }
+}

@@ -17,7 +17,7 @@ from typing import Any
 WORKSPACE = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(WORKSPACE / "src"))
 
-from fabloop.photometric_stereo.pcba_preview import export_preview
+from photometric_stereo.pcba_preview import export_preview
 
 
 def main(argv: list[str] | None = None) -> int:

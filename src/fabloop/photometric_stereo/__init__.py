@@ -1,2 +1,0 @@
-"""Photometric stereo validation tools."""
-

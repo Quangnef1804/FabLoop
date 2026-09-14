@@ -94,10 +94,14 @@ Primary references:
 ## Scope and remaining inputs
 
 The YAML files currently reference `data/visa`, `data/mvtec_ad`, and
-`data/mvtec_loco`. Those directories are absent; the available `PCBA_4Light` and
-`PCBA_4Light_edited` directories do not implement the configured datasets.
+`data/mvtec_loco`. The official VisA archive has been downloaded and selectively
+extracted, so `data/visa` contains only `pcb1` through `pcb4`; its configured root,
+split CSV, CSV integrity, and referenced-file checks pass. `data/mvtec_ad` and
+`data/mvtec_loco` remain absent. The available `PCBA_4Light` and
+`PCBA_4Light_edited` directories do not implement those configured datasets.
 `data/imagenette` is also absent and the training code is designed to download it
-when needed. Dataset paths were not redirected to unrelated data.
+when needed. Dataset paths were not redirected to unrelated data. Download and
+extraction provenance is recorded in `references/visa_source.json`.
 
 The SAM3 checkpoint and tokenizer are present. A valid checkpoint ZIP structure
 does not verify every tensor or guarantee successful model loading. The RTX 3050

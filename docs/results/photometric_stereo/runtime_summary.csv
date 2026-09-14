@@ -1,0 +1,421 @@
+object,method,lights,status,runtime_sec,runtime_iqr_sec,runtime_std_sec,runtime_min_sec,runtime_max_sec,runtime_measured_runs,runtime_warmup_runs,end_to_end_sec,peak_gpu_memory_mb,gpu_memory_exceeds_physical,runtime_caveat,runtime_caveat_evidence,repeat_outputs_identical,mae_deg,device,gpu_name,gpu_total_memory_mb,runtime_protocol,error
+ball,l2,4,ok,0.028191099991090596,0.0016815999988466501,0.0016824923658015807,0.026604400016367435,0.029967600014060736,3,1,0.028191099991090596,0.0,False,,,True,4.301647587571263,cpu,NVIDIA GeForce RTX 3050 Ti Laptop GPU,4095.5,1 warm-up run(s) then 3 measured run(s); median reported,
+ball,l2,32,ok,0.11169799999333918,0.002124449994880706,0.0021325410075499944,0.10925209999550134,0.11350099998526275,3,1,0.11169799999333918,0.0,False,,,True,4.093774134520778,cpu,NVIDIA GeForce RTX 3050 Ti Laptop GPU,4095.5,1 warm-up run(s) then 3 measured run(s); median reported,
+ball,l2,96,ok,0.281540900003165,0.016424500005086884,0.016521085993632365,0.26820609997957945,0.3010550999897532,3,1,0.281540900003165,0.0,False,,,True,4.289497850836157,cpu,NVIDIA GeForce RTX 3050 Ti Laptop GPU,4095.5,1 warm-up run(s) then 3 measured run(s); median reported,
+ball,l1,4,ok,28.101425600005314,0.5194049999990966,0.5510578222004474,27.90084580000257,28.939655800000764,3,1,28.101425600005314,0.0,False,,,True,4.806603912234847,cpu,NVIDIA GeForce RTX 3050 Ti Laptop GPU,4095.5,1 warm-up run(s) then 3 measured run(s); median reported,
+ball,l1,32,ok,31.19477779994486,0.5598082999931648,0.5598231640929572,30.62790360004874,31.74752020003507,3,1,31.19477779994486,0.0,False,,,True,2.378426975965566,cpu,NVIDIA GeForce RTX 3050 Ti Laptop GPU,4095.5,1 warm-up run(s) then 3 measured run(s); median reported,
+ball,l1,96,ok,219.54063510004198,2.7764985999965575,2.7813884990447506,217.04967550002038,222.6026727000135,3,1,219.54063510004198,0.0,False,,,True,2.4672255326662906,cpu,NVIDIA GeForce RTX 3050 Ti Laptop GPU,4095.5,1 warm-up run(s) then 3 measured run(s); median reported,
+ball,ps_fcn,4,ok,0.11758569994708523,0.00020300003234297037,0.0002148918047290004,0.11750479997135699,0.11791080003604293,3,1,0.11758569994708523,428.04052734375,False,,,True,4.587955449980154,cuda,NVIDIA GeForce RTX 3050 Ti Laptop GPU,4095.5,1 warm-up run(s) then 3 measured run(s); median reported,
+ball,ps_fcn,32,ok,0.8271101999562234,0.0006711000169161707,0.000678114527972049,0.8262705999659374,0.8276127999997698,3,1,0.8271101999562234,628.85302734375,False,,,True,2.4755179184779923,cuda,NVIDIA GeForce RTX 3050 Ti Laptop GPU,4095.5,1 warm-up run(s) then 3 measured run(s); median reported,
+ball,ps_fcn,96,ok,2.4532843999913894,0.007547599991085008,0.008694565024803607,2.4532126000267453,2.4683078000089154,3,1,2.4532843999913894,1087.85302734375,False,,,True,2.4292202233048426,cuda,NVIDIA GeForce RTX 3050 Ti Laptop GPU,4095.5,1 warm-up run(s) then 3 measured run(s); median reported,
+ball,sdm_unips,4,ok,11.713889399950858,0.15316580000217073,0.1537283957192355,11.537964599963743,11.844296199968085,3,1,11.921325300005265,1448.84375,False,,,True,1.6887209059707045,cuda,NVIDIA GeForce RTX 3050 Ti Laptop GPU,4095.5,1 warm-up run(s) then 3 measured run(s); median reported,
+ball,sdm_unips,32,unsupported_oom,,,,,,,,,,False,,,,,cuda,NVIDIA GeForce RTX 3050 Ti Laptop GPU,4095.5,1 warm-up run(s) then 3 measured run(s); median reported,"RuntimeError: SDM-UniPS subprocess failed (1).
+Traceback (most recent call last):
+  File ""D:\Visual studio code\FabLoop_VJSS26\src\photometric_stereo\wrappers\sdm_worker.py"", line 172, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\src\photometric_stereo\wrappers\sdm_worker.py"", line 145, in main
+    model.run(testdata=dataset, max_image_resolution=512, canonical_resolution=256)
+  File ""D:\Visual studio code\FabLoop_VJSS26\third-party\SDM-UniPS\sdm_unips\modules\builder\builder.py"", line 98, in run
+    nout, _, _, _  = self.net_nml(pI, pM, nImgArray.reshape(-1,1), decoder_resolution = patch_size * torch.ones(pI.shape[0],1), canonical_resolution=canonical_resolution* torch.ones(pI.shape[0],1))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1885, in _call_impl
+    return inner()
+           ^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1833, in inner
+    result = forward_call(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\parallel\data_parallel.py"", line 195, in forward
+    return self.module(*inputs[0], **module_kwargs[0])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\third-party\SDM-UniPS\sdm_unips\modules\model\model.py"", line 279, in forward
+    x = self.glc_aggregation(x)  #[len(ids), 384]       
+        ^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1779, in _wrapped_ca
+... [1014 characters omitted] ...
+y"", line 202, in forward
+    x = self.enc(x)
+        ^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\container.py"", line 253, in forward
+    input = module(input)
+            ^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\third-party\SDM-UniPS\sdm_unips\modules\model\transformer.py"", line 150, in forward
+    return self.mab(X, X)
+           ^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\third-party\SDM-UniPS\sdm_unips\modules\model\transformer.py"", line 141, in forward
+    O = O + self.dropout2(self.fc_o2(self.dropout1(F.gelu(self.fc_o1(O_))))) 
+                                                   ^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 1.21 GiB. GPU 0 has a total capacity of 4.00 GiB of which 0 bytes is free. Of the allocated memory 8.25 GiB is allocated by PyTorch, and 2.11 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)
+"
+ball,sdm_unips,96,unsupported_oom,,,,,,,,,,False,,,,,cuda,NVIDIA GeForce RTX 3050 Ti Laptop GPU,4095.5,1 warm-up run(s) then 3 measured run(s); median reported,"RuntimeError: SDM-UniPS subprocess failed (1).
+Traceback (most recent call last):
+  File ""D:\Visual studio code\FabLoop_VJSS26\src\photometric_stereo\wrappers\sdm_worker.py"", line 172, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\src\photometric_stereo\wrappers\sdm_worker.py"", line 145, in main
+    model.run(testdata=dataset, max_image_resolution=512, canonical_resolution=256)
+  File ""D:\Visual studio code\FabLoop_VJSS26\third-party\SDM-UniPS\sdm_unips\modules\builder\builder.py"", line 98, in run
+    nout, _, _, _  = self.net_nml(pI, pM, nImgArray.reshape(-1,1), decoder_resolution = patch_size * torch.ones(pI.shape[0],1), canonical_resolution=canonical_resolution* torch.ones(pI.shape[0],1))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1885, in _call_impl
+    return inner()
+           ^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1833, in inner
+    result = forward_call(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\parallel\data_parallel.py"", line 195, in forward
+    return self.module(*inputs[0], **module_kwargs[0])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\third-party\SDM-UniPS\sdm_unips\modules\model\model.py"", line 226, in forward
+    glc = self.image_encoder(data, nImgArray, canonical_resolution) # torch.Size([B, N, 256, H/4, W/4]) [img, mask]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio cod
+... [2591 characters omitted] ...
+_unips\modules\model\convnext.py"", line 111, in forward_features
+    x = self.stages[i](x)            
+        ^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\container.py"", line 253, in forward
+    input = module(input)
+            ^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\third-party\SDM-UniPS\sdm_unips\modules\model\convnext.py"", line 42, in forward
+    x = self.act(x)
+        ^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\activation.py"", line 816, in forward
+    return F.gelu(input, approximate=self.approximate)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 2.25 GiB. GPU 0 has a total capacity of 4.00 GiB of which 0 bytes is free. Of the allocated memory 5.60 GiB is allocated by PyTorch, and 3.00 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)
+"
+harvest,l2,4,ok,0.02966500003822148,0.000232299993513152,0.0002332486640405357,0.02946910000173375,0.029933699988760054,3,1,0.02966500003822148,0.0,False,,,True,31.672317543372856,cpu,NVIDIA GeForce RTX 3050 Ti Laptop GPU,4095.5,1 warm-up run(s) then 3 measured run(s); median reported,
+harvest,l2,32,ok,0.12095249997219071,0.0012563999916892499,0.0012864762947106792,0.1192171000293456,0.1217299000127241,3,1,0.12095249997219071,0.0,False,,,True,30.641076632329593,cpu,NVIDIA GeForce RTX 3050 Ti Laptop GPU,4095.5,1 warm-up run(s) then 3 measured run(s); median reported,
+harvest,l2,96,ok,0.27410770003916696,0.005821350001497194,0.005888967065150418,0.26674509997246787,0.27838779997546226,3,1,0.27410770003916696,0.0,False,,,True,30.54651524518239,cpu,NVIDIA GeForce RTX 3050 Ti Laptop GPU,4095.5,1 warm-up run(s) then 3 measured run(s); median reported,
+harvest,l1,4,ok,222.087893500051,1.3992993999854662,1.4342903548896353,220.14320430002408,222.941803099995,3,1,222.087893500051,0.0,False,,,True,33.99969949231913,cpu,NVIDIA GeForce RTX 3050 Ti Laptop GPU,4095.5,1 warm-up run(s) then 3 measured run(s); median reported,
+harvest,l1,32,ok,120.87692370003788,0.7760770000168122,0.7793656421799539,119.9769682000042,121.52912220003782,3,1,120.87692370003788,0.0,False,,,True,28.525013805400167,cpu,NVIDIA GeForce RTX 3050 Ti Laptop GPU,4095.5,1 warm-up run(s) then 3 measured run(s); median reported,
+harvest,l1,96,ok,969.9301593000419,107.57337314999313,107.81134259517295,874.7569854999892,1089.9037317999755,3,1,969.9301593000419,0.0,False,possible_partial_throttle,"Measured runs rise monotonically 875 -> 970 -> 1090 s (IQR/median 11%, the largest spread in the runtime pass), consistent with the throttle beginning during this case. Median 970 s is still within x1.04 of the 935 s pass-1 single run.",True,28.257729265967914,cpu,NVIDIA GeForce RTX 3050 Ti Laptop GPU,4095.5,1 warm-up run(s) then 3 measured run(s); median reported,
+harvest,ps_fcn,4,ok,0.11842640000395477,0.0020192500087432563,0.0021398619444774705,0.11763390002306551,0.12167240004055202,3,1,0.11842640000395477,428.04052734375,False,,,True,20.312195214591014,cuda,NVIDIA GeForce RTX 3050 Ti Laptop GPU,4095.5,1 warm-up run(s) then 3 measured run(s); median reported,
+harvest,ps_fcn,32,ok,0.8280499000102282,0.0020536000083666295,0.002176585204908606,0.8247470000060275,0.8288542000227608,3,1,0.8280499000102282,628.85302734375,False,,,True,16.246093753390575,cuda,NVIDIA GeForce RTX 3050 Ti Laptop GPU,4095.5,1 warm-up run(s) then 3 measured run(s); median reported,
+harvest,ps_fcn,96,ok,2.503378800000064,0.013302200008183718,0.013379099820796308,2.487595600017812,2.5142000000341795,3,1,2.503378800000064,1087.85302734375,False,,,True,15.866461381810735,cuda,NVIDIA GeForce RTX 3050 Ti Laptop GPU,4095.5,1 warm-up run(s) then 3 measured run(s); median reported,
+harvest,sdm_unips,4,ok,6.156859800044913,0.025010849960381165,0.025019334167192254,6.132977400033269,6.182999099954031,3,1,6.361667799996212,1381.9912109375,False,,,True,12.49545567886637,cuda,NVIDIA GeForce RTX 3050 Ti Laptop GPU,4095.5,1 warm-up run(s) then 3 measured run(s); median reported,
+harvest,sdm_unips,32,unsupported_oom,,,,,,,,,,False,,,,,cuda,NVIDIA GeForce RTX 3050 Ti Laptop GPU,4095.5,1 warm-up run(s) then 3 measured run(s); median reported,"RuntimeError: SDM-UniPS subprocess failed (1).
+Traceback (most recent call last):
+  File ""D:\Visual studio code\FabLoop_VJSS26\src\photometric_stereo\wrappers\sdm_worker.py"", line 172, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\src\photometric_stereo\wrappers\sdm_worker.py"", line 145, in main
+    model.run(testdata=dataset, max_image_resolution=512, canonical_resolution=256)
+  File ""D:\Visual studio code\FabLoop_VJSS26\third-party\SDM-UniPS\sdm_unips\modules\builder\builder.py"", line 98, in run
+    nout, _, _, _  = self.net_nml(pI, pM, nImgArray.reshape(-1,1), decoder_resolution = patch_size * torch.ones(pI.shape[0],1), canonical_resolution=canonical_resolution* torch.ones(pI.shape[0],1))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1885, in _call_impl
+    return inner()
+           ^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1833, in inner
+    result = forward_call(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\parallel\data_parallel.py"", line 195, in forward
+    return self.module(*inputs[0], **module_kwargs[0])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\third-party\SDM-UniPS\sdm_unips\modules\model\model.py"", line 279, in forward
+    x = self.glc_aggregation(x)  #[len(ids), 384]       
+        ^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1779, in _wrapped_ca
+... [1014 characters omitted] ...
+y"", line 202, in forward
+    x = self.enc(x)
+        ^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\container.py"", line 253, in forward
+    input = module(input)
+            ^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\third-party\SDM-UniPS\sdm_unips\modules\model\transformer.py"", line 150, in forward
+    return self.mab(X, X)
+           ^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\third-party\SDM-UniPS\sdm_unips\modules\model\transformer.py"", line 141, in forward
+    O = O + self.dropout2(self.fc_o2(self.dropout1(F.gelu(self.fc_o1(O_))))) 
+                                                   ^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 1.13 GiB. GPU 0 has a total capacity of 4.00 GiB of which 0 bytes is free. Of the allocated memory 7.81 GiB is allocated by PyTorch, and 2.48 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)
+"
+harvest,sdm_unips,96,unsupported_oom,,,,,,,,,,False,,,,,cuda,NVIDIA GeForce RTX 3050 Ti Laptop GPU,4095.5,1 warm-up run(s) then 3 measured run(s); median reported,"RuntimeError: SDM-UniPS subprocess failed (1).
+Traceback (most recent call last):
+  File ""D:\Visual studio code\FabLoop_VJSS26\src\photometric_stereo\wrappers\sdm_worker.py"", line 172, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\src\photometric_stereo\wrappers\sdm_worker.py"", line 145, in main
+    model.run(testdata=dataset, max_image_resolution=512, canonical_resolution=256)
+  File ""D:\Visual studio code\FabLoop_VJSS26\third-party\SDM-UniPS\sdm_unips\modules\builder\builder.py"", line 98, in run
+    nout, _, _, _  = self.net_nml(pI, pM, nImgArray.reshape(-1,1), decoder_resolution = patch_size * torch.ones(pI.shape[0],1), canonical_resolution=canonical_resolution* torch.ones(pI.shape[0],1))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1885, in _call_impl
+    return inner()
+           ^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1833, in inner
+    result = forward_call(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\parallel\data_parallel.py"", line 195, in forward
+    return self.module(*inputs[0], **module_kwargs[0])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\third-party\SDM-UniPS\sdm_unips\modules\model\model.py"", line 226, in forward
+    glc = self.image_encoder(data, nImgArray, canonical_resolution) # torch.Size([B, N, 256, H/4, W/4]) [img, mask]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio cod
+... [2591 characters omitted] ...
+_unips\modules\model\convnext.py"", line 111, in forward_features
+    x = self.stages[i](x)            
+        ^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\container.py"", line 253, in forward
+    input = module(input)
+            ^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\third-party\SDM-UniPS\sdm_unips\modules\model\convnext.py"", line 42, in forward
+    x = self.act(x)
+        ^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\activation.py"", line 816, in forward
+    return F.gelu(input, approximate=self.approximate)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 2.25 GiB. GPU 0 has a total capacity of 4.00 GiB of which 0 bytes is free. Of the allocated memory 5.60 GiB is allocated by PyTorch, and 3.00 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)
+"
+pot1,l2,4,ok,0.027230000006966293,0.0029724000196438283,0.0029881030565223625,0.024787499976810068,0.030732300016097724,3,1,0.027230000006966293,0.0,False,,,True,9.712774369354975,cpu,NVIDIA GeForce RTX 3050 Ti Laptop GPU,4095.5,1 warm-up run(s) then 3 measured run(s); median reported,
+pot1,l2,32,ok,0.23448889999417588,0.013228100026026368,0.013916597277121886,0.21377299999585375,0.2402292000479065,3,1,0.23448889999417588,0.0,False,,,True,9.139598796745124,cpu,NVIDIA GeForce RTX 3050 Ti Laptop GPU,4095.5,1 warm-up run(s) then 3 measured run(s); median reported,
+pot1,l2,96,ok,0.44886140001472086,0.0157523000088986,0.01721713701615937,0.42107229999965057,0.45257690001744777,3,1,0.44886140001472086,0.0,False,,,True,9.119905490654485,cpu,NVIDIA GeForce RTX 3050 Ti Laptop GPU,4095.5,1 warm-up run(s) then 3 measured run(s); median reported,
+pot1,l1,4,ok,468.142720200005,7.194830600026762,7.196522846954685,460.6775912999874,475.0672525000409,3,1,468.142720200005,0.0,False,screen_locked_e_core_throttle,"Runtime-pass median 468 s (runs 461/475/468) vs 101 s single run in pass 1 (x4.65), while ball and harvest L1 ratios were 0.56-1.04. Screen was locked (LockApp running); L1 is single-threaded (one thread held 10,334 CPU-s of 76) on a hybrid i7-12700H, so Windows moved it off the P-cores. AC power, 100% battery, Balanced plan, no thermal throttle.",True,10.72317510596056,cpu,NVIDIA GeForce RTX 3050 Ti Laptop GPU,4095.5,1 warm-up run(s) then 3 measured run(s); median reported,
+pot1,l1,32,ok,514.4515881999978,0.2960565499961376,0.3016566125873761,514.0553234000108,514.6474365000031,3,1,514.4515881999978,0.0,False,screen_locked_e_core_throttle,Runtime-pass median 514 s (runs 515/514/514) vs 109 s single run in pass 1 (x4.74); same locked-screen conditions as pot1/l1/4.,True,8.049801852416538,cpu,NVIDIA GeForce RTX 3050 Ti Laptop GPU,4095.5,1 warm-up run(s) then 3 measured run(s); median reported,
+pot1,l1,96,ok,1289.5797702999553,229.59831229998963,238.82912468366982,1173.8756955999997,1633.072320199979,3,1,1289.5797702999553,0.0,False,screen_locked_e_core_throttle,Measured entirely during the same locked-screen period as pot1/l1/4 and pot1/l1/32; started 20:29 and still running at 21:42 against a 741 s single run in pass 1.,True,7.9967675377735,cpu,NVIDIA GeForce RTX 3050 Ti Laptop GPU,4095.5,1 warm-up run(s) then 3 measured run(s); median reported,
+pot1,ps_fcn,4,ok,0.12314640003023669,0.0018409499898552895,0.0018412425618060022,0.12136230000760406,0.12504419998731464,3,1,0.12314640003023669,428.04052734375,False,,,True,9.591705629095154,cuda,NVIDIA GeForce RTX 3050 Ti Laptop GPU,4095.5,1 warm-up run(s) then 3 measured run(s); median reported,
+pot1,ps_fcn,32,ok,0.8614759999909438,0.0017558499821461737,0.0018224354804129025,0.8605656000436284,0.8640773000079207,3,1,0.8614759999909438,628.85302734375,False,,,True,7.103069974313258,cuda,NVIDIA GeForce RTX 3050 Ti Laptop GPU,4095.5,1 warm-up run(s) then 3 measured run(s); median reported,
+pot1,ps_fcn,96,ok,2.5427471000002697,0.016900449991226196,0.01704221669886358,2.522047200007364,2.5558480999898165,3,1,2.5427471000002697,1087.85302734375,False,,,True,6.885778584131534,cuda,NVIDIA GeForce RTX 3050 Ti Laptop GPU,4095.5,1 warm-up run(s) then 3 measured run(s); median reported,
+pot1,sdm_unips,4,ok,5.239787200000137,0.0758203000004869,0.07933590703314511,5.2044194000191055,5.356060000020079,3,1,5.477821199980099,1370.69873046875,False,,,True,4.96590735744904,cuda,NVIDIA GeForce RTX 3050 Ti Laptop GPU,4095.5,1 warm-up run(s) then 3 measured run(s); median reported,
+pot1,sdm_unips,32,unsupported_oom,,,,,,,,,,False,,,,,cuda,NVIDIA GeForce RTX 3050 Ti Laptop GPU,4095.5,1 warm-up run(s) then 3 measured run(s); median reported,"RuntimeError: SDM-UniPS subprocess failed (1).
+Traceback (most recent call last):
+  File ""D:\Visual studio code\FabLoop_VJSS26\src\photometric_stereo\wrappers\sdm_worker.py"", line 172, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\src\photometric_stereo\wrappers\sdm_worker.py"", line 145, in main
+    model.run(testdata=dataset, max_image_resolution=512, canonical_resolution=256)
+  File ""D:\Visual studio code\FabLoop_VJSS26\third-party\SDM-UniPS\sdm_unips\modules\builder\builder.py"", line 98, in run
+    nout, _, _, _  = self.net_nml(pI, pM, nImgArray.reshape(-1,1), decoder_resolution = patch_size * torch.ones(pI.shape[0],1), canonical_resolution=canonical_resolution* torch.ones(pI.shape[0],1))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1885, in _call_impl
+    return inner()
+           ^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1833, in inner
+    result = forward_call(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\parallel\data_parallel.py"", line 195, in forward
+    return self.module(*inputs[0], **module_kwargs[0])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\third-party\SDM-UniPS\sdm_unips\modules\model\model.py"", line 279, in forward
+    x = self.glc_aggregation(x)  #[len(ids), 384]       
+        ^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1779, in _wrapped_ca
+... [1014 characters omitted] ...
+y"", line 202, in forward
+    x = self.enc(x)
+        ^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\container.py"", line 253, in forward
+    input = module(input)
+            ^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\third-party\SDM-UniPS\sdm_unips\modules\model\transformer.py"", line 150, in forward
+    return self.mab(X, X)
+           ^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\third-party\SDM-UniPS\sdm_unips\modules\model\transformer.py"", line 141, in forward
+    O = O + self.dropout2(self.fc_o2(self.dropout1(F.gelu(self.fc_o1(O_))))) 
+                                                   ^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 1.12 GiB. GPU 0 has a total capacity of 4.00 GiB of which 0 bytes is free. Of the allocated memory 7.73 GiB is allocated by PyTorch, and 2.54 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)
+"
+pot1,sdm_unips,96,unsupported_oom,,,,,,,,,,False,,,,,cuda,NVIDIA GeForce RTX 3050 Ti Laptop GPU,4095.5,1 warm-up run(s) then 3 measured run(s); median reported,"RuntimeError: SDM-UniPS subprocess failed (1).
+Traceback (most recent call last):
+  File ""D:\Visual studio code\FabLoop_VJSS26\src\photometric_stereo\wrappers\sdm_worker.py"", line 172, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\src\photometric_stereo\wrappers\sdm_worker.py"", line 145, in main
+    model.run(testdata=dataset, max_image_resolution=512, canonical_resolution=256)
+  File ""D:\Visual studio code\FabLoop_VJSS26\third-party\SDM-UniPS\sdm_unips\modules\builder\builder.py"", line 98, in run
+    nout, _, _, _  = self.net_nml(pI, pM, nImgArray.reshape(-1,1), decoder_resolution = patch_size * torch.ones(pI.shape[0],1), canonical_resolution=canonical_resolution* torch.ones(pI.shape[0],1))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1885, in _call_impl
+    return inner()
+           ^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1833, in inner
+    result = forward_call(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\parallel\data_parallel.py"", line 195, in forward
+    return self.module(*inputs[0], **module_kwargs[0])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\third-party\SDM-UniPS\sdm_unips\modules\model\model.py"", line 226, in forward
+    glc = self.image_encoder(data, nImgArray, canonical_resolution) # torch.Size([B, N, 256, H/4, W/4]) [img, mask]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio cod
+... [2591 characters omitted] ...
+_unips\modules\model\convnext.py"", line 111, in forward_features
+    x = self.stages[i](x)            
+        ^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\container.py"", line 253, in forward
+    input = module(input)
+            ^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\third-party\SDM-UniPS\sdm_unips\modules\model\convnext.py"", line 42, in forward
+    x = self.act(x)
+        ^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\module.py"", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""D:\Visual studio code\FabLoop_VJSS26\.venv\Lib\site-packages\torch\nn\modules\activation.py"", line 816, in forward
+    return F.gelu(input, approximate=self.approximate)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 2.25 GiB. GPU 0 has a total capacity of 4.00 GiB of which 0 bytes is free. Of the allocated memory 5.60 GiB is allocated by PyTorch, and 3.00 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)
+"

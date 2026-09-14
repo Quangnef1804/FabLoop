@@ -1,6 +1,6 @@
 # Kiểm định photometric stereo trên DiLiGenT
 
-Code đã chuyển từ thư mục con `FabLoop` sang `src/fabloop/photometric_stereo/` trong dự án này. Nhánh này kiểm định normal bằng ground truth DiLiGenT; bộ PCBA không có ground truth nên dùng [quy trình PCBA riêng](photometric_stereo_pcba.md). Chưa có ảnh DiLiGenT thật trong workspace, vì vậy chưa có kết quả tái lập baseline công bố.
+Code nằm tại `src/photometric_stereo/`, cùng cấp với `src/models/` trong dự án này. Nhánh này kiểm định normal bằng ground truth DiLiGenT; bộ PCBA không có ground truth nên dùng [quy trình PCBA riêng](photometric_stereo_pcba.md). DiLiGenT main hiện đã có đủ 10 object tại `data/diligent/DiLiGenT/pmsData`; gate Ball + L2 + 96 đạt 4,2895° so với baseline công bố 4,1000°. Xem [pipeline benchmark nhiều phương pháp](photometric_stereo_benchmark.md) để chạy ma trận 4/8/16/32/96 đèn.
 
 ## Môi trường và dependency
 
@@ -23,7 +23,7 @@ Mỗi object của [DiLiGenT chính thức](https://sites.google.com/site/photom
 [CSV baseline](../references/diligent_main_l2_baseline.csv) có đủ 10 đối tượng, solver L2, 96 ảnh. Ngày 2026-09-08 đã đối chiếu và khớp đủ 10 số với dòng BASELINE của [bảng chính thức](https://sites.google.com/site/photometricstereodata/single/summary-of-benchmarking-results); [bằng chứng](../references/diligent_baseline_verification.json) lưu giá trị và hash CSV. Không sửa số liệu, không tạo baseline giả cho 4 ảnh hoặc L1.
 
 ```powershell
-.\.venv\Scripts\python.exe scripts\validate_diligent.py --object-dir data/diligent/BallPNG --image-counts all --solvers l2 --require-baseline --skip-mesh
+.\.venv\Scripts\python.exe scripts\validate_diligent.py --object-dir data/diligent/DiLiGenT/pmsData/ballPNG --image-counts all --solvers l2 --require-baseline --skip-mesh
 ```
 
 CSV cấu hình thiếu/rỗng/sai sẽ báo lỗi. `reference_available` nghĩa là đã gắn số tham chiếu; `not_applicable` nghĩa là protocol không có tham chiếu phù hợp. L2/96 ảnh của object DiLiGenT đã biết mà thiếu dòng CSV sẽ bị chặn trước khi solve. `--require-baseline` buộc mọi case yêu cầu phải có reference. Không đặt ngưỡng MAE pass/fail tùy ý.
@@ -33,7 +33,7 @@ CSV cấu hình thiếu/rỗng/sai sẽ báo lỗi. `reference_available` nghĩa
 Không xem 4 ảnh đầu hoặc các index cách đều trong danh sách là mô phỏng hộp thật. Đọc hướng sáng trước:
 
 ```powershell
-.\.venv\Scripts\python.exe scripts\validate_diligent.py --object-dir data/diligent/BallPNG --inspect-lights
+.\.venv\Scripts\python.exe scripts\validate_diligent.py --object-dir data/diligent/DiLiGenT/pmsData/ballPNG --inspect-lights
 ```
 
 Lệnh in index zero-based, tên ảnh, vector, azimuth, elevation, rank và condition number. Chọn 4 index theo hướng đèn thực đã hiệu chuẩn, rồi truyền chuỗi bốn số vào `--indices`. Độ trải azimuth khoảng 90° chưa đủ để khẳng định tương đương hộp: elevation, cường độ, frame camera và điều kiện chụp cũng phải tương ứng. Hiện không có `light_directions.txt` DiLiGenT hay calibration hộp, nên chưa chọn bộ index cụ thể.
@@ -41,7 +41,7 @@ Lệnh in index zero-based, tên ảnh, vector, azimuth, elevation, rank và con
 Nếu chỉ cần smoke test tuần tự, phải khai báo rõ:
 
 ```powershell
-.\.venv\Scripts\python.exe scripts\validate_diligent.py --object-dir data/diligent/BallPNG --image-counts 4 --selection sequential --solvers l2 l1 --skip-mesh
+.\.venv\Scripts\python.exe scripts\validate_diligent.py --object-dir data/diligent/DiLiGenT/pmsData/ballPNG --image-counts 4 --selection sequential --solvers l2 l1 --skip-mesh
 ```
 
 Index trùng, ít hơn 3 quan sát, vector không hữu hạn và ma trận hướng sáng rank khác 3 đều bị từ chối. Condition number được báo cáo, không tự đặt một ngưỡng để gọi hình học là tương đương hộp.

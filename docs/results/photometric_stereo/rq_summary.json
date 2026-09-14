@@ -1,0 +1,356 @@
+{
+  "rq1_accuracy_loss_4_vs_many": {
+    "l2": {
+      "supported_light_counts": [
+        4,
+        8,
+        16,
+        32,
+        64,
+        96
+      ],
+      "mae_deg_at_4": 16.601954087555885,
+      "p95_deg_at_4": 42.53931961311586,
+      "vs_32_lights": {
+        "objects": 10,
+        "mae_deg_reference": 15.41846153850972,
+        "mae_loss_deg": 1.1834925490461647,
+        "mae_loss_median_deg": 0.9697354191742154,
+        "mae_loss_pct_of_reference": 7.675814776268242,
+        "objects_worse_at_4": 9,
+        "p95_deg_reference": 37.858157804220006,
+        "p95_loss_deg": 4.681161808895853,
+        "is_max_supported_on_this_gpu": false
+      },
+      "vs_96_lights": {
+        "objects": 10,
+        "mae_deg_reference": 15.464467084609984,
+        "mae_loss_deg": 1.1374870029459003,
+        "mae_loss_median_deg": 0.9955509615969822,
+        "mae_loss_pct_of_reference": 7.355487885372469,
+        "objects_worse_at_4": 9,
+        "p95_deg_reference": 37.99863796617405,
+        "p95_loss_deg": 4.540681646941809,
+        "is_max_supported_on_this_gpu": true
+      }
+    },
+    "l1": {
+      "supported_light_counts": [
+        4,
+        8,
+        16,
+        32,
+        64,
+        96
+      ],
+      "mae_deg_at_4": 17.626991261583772,
+      "p95_deg_at_4": 47.381535008053646,
+      "vs_32_lights": {
+        "objects": 10,
+        "mae_deg_reference": 13.296464362687397,
+        "mae_loss_deg": 4.330526898896377,
+        "mae_loss_median_deg": 4.208829998860871,
+        "mae_loss_pct_of_reference": 32.56901068413888,
+        "objects_worse_at_4": 10,
+        "p95_deg_reference": 32.8600291655464,
+        "p95_loss_deg": 14.52150584250725,
+        "is_max_supported_on_this_gpu": false
+      },
+      "vs_96_lights": {
+        "objects": 10,
+        "mae_deg_reference": 13.193936234718656,
+        "mae_loss_deg": 4.4330550268651185,
+        "mae_loss_median_deg": 4.285393167121546,
+        "mae_loss_pct_of_reference": 33.59918486796937,
+        "objects_worse_at_4": 10,
+        "p95_deg_reference": 32.783996837138766,
+        "p95_loss_deg": 14.597538170914879,
+        "is_max_supported_on_this_gpu": true
+      }
+    },
+    "ps_fcn": {
+      "supported_light_counts": [
+        4,
+        8,
+        16,
+        32,
+        64,
+        96
+      ],
+      "mae_deg_at_4": 11.175585187497946,
+      "p95_deg_at_4": 28.621152302677487,
+      "vs_32_lights": {
+        "objects": 10,
+        "mae_deg_reference": 8.557238240932113,
+        "mae_loss_deg": 2.6183469465658327,
+        "mae_loss_median_deg": 2.631139467659231,
+        "mae_loss_pct_of_reference": 30.598037273771457,
+        "objects_worse_at_4": 10,
+        "p95_deg_reference": 23.28806216032637,
+        "p95_loss_deg": 5.333090142351115,
+        "is_max_supported_on_this_gpu": false
+      },
+      "vs_96_lights": {
+        "objects": 10,
+        "mae_deg_reference": 8.398662703063701,
+        "mae_loss_deg": 2.776922484434244,
+        "mae_loss_median_deg": 2.8138310742102988,
+        "mae_loss_pct_of_reference": 33.063864839116185,
+        "objects_worse_at_4": 10,
+        "p95_deg_reference": 22.852796937503296,
+        "p95_loss_deg": 5.768355365174189,
+        "is_max_supported_on_this_gpu": true
+      }
+    },
+    "sdm_unips": {
+      "supported_light_counts": [
+        4,
+        8,
+        16
+      ],
+      "mae_deg_at_4": 6.604813153970848,
+      "p95_deg_at_4": 17.286218618140598,
+      "vs_16_lights": {
+        "objects": 10,
+        "mae_deg_reference": 5.674602519734624,
+        "mae_loss_deg": 0.9302106342362232,
+        "mae_loss_median_deg": 0.7426579004668596,
+        "mae_loss_pct_of_reference": 16.392524956615375,
+        "objects_worse_at_4": 10,
+        "p95_deg_reference": 14.54311520606471,
+        "p95_loss_deg": 2.7431034120758873,
+        "is_max_supported_on_this_gpu": true
+      },
+      "unsupported_light_counts": [
+        32,
+        64,
+        96
+      ]
+    }
+  },
+  "rq2_robust_deep_vs_l2_at_4": {
+    "lights": 4,
+    "test": "paired exact two-sided Wilcoxon signed-rank over objects (sign test if SciPy absent), Holm-adjusted across methods, alpha=0.05",
+    "comparisons": {
+      "l1": {
+        "objects": 10,
+        "mae_deg": 17.626991261583772,
+        "l2_mae_deg": 16.601954087555885,
+        "delta_mae_deg": 1.0250371740278887,
+        "delta_mae_median_deg": 1.1198694608794453,
+        "relative_improvement_pct": -6.174195932731862,
+        "objects_better_than_l2": 1,
+        "objects_worse_than_l2": 9,
+        "wilcoxon_p": 0.01953125,
+        "sign_test_p": 0.021484375,
+        "delta_p95_deg": 4.842215394937787,
+        "objects_better_p95": 0,
+        "wilcoxon_p_p95": 0.001953125,
+        "per_object_delta_mae_deg": {
+          "ball": 0.504956324663584,
+          "bear": 1.348423098436136,
+          "buddha": 0.3732448487979383,
+          "cat": 0.9567447971664862,
+          "cow": 1.5465934215160537,
+          "goblet": 1.9945806715832362,
+          "harvest": 2.3273819489462753,
+          "pot1": 1.010400736605586,
+          "pot2": 1.2293381851533045,
+          "reading": -1.0412922925897128
+        },
+        "p_holm": 0.01953125,
+        "verdict": "significantly worse than L2"
+      },
+      "ps_fcn": {
+        "objects": 10,
+        "mae_deg": 11.175585187497946,
+        "l2_mae_deg": 16.601954087555885,
+        "delta_mae_deg": -5.4263689000579385,
+        "delta_mae_median_deg": -4.84301443189212,
+        "relative_improvement_pct": 32.68512171181893,
+        "objects_better_than_l2": 9,
+        "objects_worse_than_l2": 1,
+        "wilcoxon_p": 0.005859375,
+        "sign_test_p": 0.021484375,
+        "delta_p95_deg": -13.918167310438374,
+        "objects_better_p95": 10,
+        "wilcoxon_p_p95": 0.001953125,
+        "per_object_delta_mae_deg": {
+          "ball": 0.28630786240889083,
+          "bear": -4.562075133996373,
+          "buddha": -5.123953729787868,
+          "cat": -0.5960468961421803,
+          "cow": -15.897665894623625,
+          "goblet": -9.032984447216311,
+          "harvest": -11.360122328781841,
+          "pot1": -0.12106874025982073,
+          "pot2": -5.694108609726422,
+          "reading": -2.161971082453835
+        },
+        "p_holm": 0.01171875,
+        "verdict": "significantly better than L2"
+      },
+      "sdm_unips": {
+        "objects": 10,
+        "mae_deg": 6.604813153970848,
+        "l2_mae_deg": 16.601954087555885,
+        "delta_mae_deg": -9.997140933585037,
+        "delta_mae_median_deg": -9.592089051012284,
+        "relative_improvement_pct": 60.21665209325248,
+        "objects_better_than_l2": 10,
+        "objects_worse_than_l2": 0,
+        "wilcoxon_p": 0.001953125,
+        "sign_test_p": 0.001953125,
+        "delta_p95_deg": -25.253100994975263,
+        "objects_better_p95": 10,
+        "wilcoxon_p_p95": 0.001953125,
+        "per_object_delta_mae_deg": {
+          "ball": -2.612926681600558,
+          "bear": -9.460938039426276,
+          "buddha": -7.529342340572457,
+          "cat": -2.356145318657406,
+          "cow": -21.530780613492077,
+          "goblet": -12.46151498276945,
+          "harvest": -19.176861864506485,
+          "pot1": -4.746867011905935,
+          "pot2": -10.372792420321442,
+          "reading": -9.72324006259829
+        },
+        "p_holm": 0.005859375,
+        "verdict": "significantly better than L2"
+      }
+    }
+  },
+  "rq3_tradeoff_at_4": {
+    "lights": 4,
+    "methods": {
+      "l2": {
+        "label": "L2",
+        "complete_at_4": true,
+        "mae_deg_at_4": 16.601954087555885,
+        "p95_deg_at_4": 42.53931961311586,
+        "runtime_sec_at_4_median": 0.028191099991090596,
+        "runtime_objects_at_4": [
+          "ball",
+          "harvest",
+          "pot1"
+        ],
+        "runtime_sec_at_4_median_excluding_caveats": 0.028191099991090596,
+        "runtime_caveats_at_4": [],
+        "peak_gpu_memory_mb_at_4_max": 0.0,
+        "supported_light_counts_on_this_gpu": [
+          4,
+          8,
+          16,
+          32,
+          64,
+          96
+        ],
+        "max_supported_lights": 96,
+        "light_counts_spilling_past_physical_vram": [],
+        "runs_on": "CPU",
+        "inputs": "images + calibrated light directions",
+        "dependencies": "NumPy only; closed-form least squares",
+        "complexity": "lowest; no model, no training, deterministic",
+        "licence": "benchmarked through GPL RobustPhotometricStereo; least squares is a few lines of NumPy, so an independent reimplementation carries no licence constraint"
+      },
+      "l1": {
+        "label": "L1",
+        "complete_at_4": true,
+        "mae_deg_at_4": 17.626991261583772,
+        "p95_deg_at_4": 47.381535008053646,
+        "runtime_sec_at_4_median": 222.087893500051,
+        "runtime_objects_at_4": [
+          "ball",
+          "harvest",
+          "pot1"
+        ],
+        "runtime_sec_at_4_median_excluding_caveats": 125.09465955002815,
+        "runtime_caveats_at_4": [
+          "pot1"
+        ],
+        "peak_gpu_memory_mb_at_4_max": 0.0,
+        "supported_light_counts_on_this_gpu": [
+          4,
+          8,
+          16,
+          32,
+          64,
+          96
+        ],
+        "max_supported_lights": 96,
+        "light_counts_spilling_past_physical_vram": [],
+        "runs_on": "CPU",
+        "inputs": "images + calibrated light directions",
+        "dependencies": "NumPy/SciPy; per-pixel sparse regression (official RobustPhotometricStereo)",
+        "complexity": "low to implement, but slow per pixel",
+        "licence": "GPL (RobustPhotometricStereo); commercial use needs author licence or an independent implementation"
+      },
+      "ps_fcn": {
+        "label": "PS-FCN",
+        "complete_at_4": true,
+        "mae_deg_at_4": 11.175585187497946,
+        "p95_deg_at_4": 28.621152302677487,
+        "runtime_sec_at_4_median": 0.11842640000395477,
+        "runtime_objects_at_4": [
+          "ball",
+          "harvest",
+          "pot1"
+        ],
+        "runtime_sec_at_4_median_excluding_caveats": 0.11842640000395477,
+        "runtime_caveats_at_4": [],
+        "peak_gpu_memory_mb_at_4_max": 428.04052734375,
+        "supported_light_counts_on_this_gpu": [
+          4,
+          8,
+          16,
+          32,
+          64,
+          96
+        ],
+        "max_supported_lights": 96,
+        "light_counts_spilling_past_physical_vram": [],
+        "runs_on": "GPU or CPU (PyTorch)",
+        "inputs": "images + calibrated light directions",
+        "dependencies": "PyTorch, 2.2M-parameter pretrained checkpoint (author HuggingFace mirror)",
+        "complexity": "moderate; needs the [0,1] input-scale convention, deterministic",
+        "licence": "MIT (PS-FCN repository)"
+      },
+      "sdm_unips": {
+        "label": "SDM-UniPS",
+        "complete_at_4": true,
+        "mae_deg_at_4": 6.604813153970848,
+        "p95_deg_at_4": 17.286218618140598,
+        "runtime_sec_at_4_median": 6.156859800044913,
+        "runtime_objects_at_4": [
+          "ball",
+          "harvest",
+          "pot1"
+        ],
+        "runtime_sec_at_4_median_excluding_caveats": 6.156859800044913,
+        "runtime_caveats_at_4": [],
+        "peak_gpu_memory_mb_at_4_max": 1448.84375,
+        "supported_light_counts_on_this_gpu": [
+          4,
+          8,
+          16
+        ],
+        "max_supported_lights": 16,
+        "light_counts_spilling_past_physical_vram": [
+          16
+        ],
+        "runs_on": "CUDA only on this machine (CPU path crashes natively)",
+        "inputs": "images only; lights not used",
+        "dependencies": "PyTorch transformer, pretrained checkpoint, process isolation",
+        "complexity": "highest; VRAM-bound, non-commercial licence blocks product deployment",
+        "licence": "MIT with a non-commercial clause (SDM-UniPS repository); research use only"
+      }
+    },
+    "pareto_front_mae_runtime_memory": [
+      "l2",
+      "ps_fcn",
+      "sdm_unips"
+    ],
+    "pareto_note": "Pareto over mean MAE, median runtime and peak GPU memory at 4 lights; methods without repeated-run runtime are excluded rather than guessed."
+  }
+}

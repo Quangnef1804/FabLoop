@@ -11,7 +11,7 @@ import numpy as np
 
 from .diligent_validate import (
     import_cv2, import_rps_class, normal_to_rgb,
-    normals_to_height_frankot_chellappa, solve_with_rps,
+    normals_to_height_frankot_chellappa, repo_root, solve_with_rps,
 )
 from .preview_alignment import align_lights
 
@@ -124,7 +124,7 @@ def export_preview(board_dir: Path, output_dir: Path, max_edge: int = 1024) -> d
     solve_mask = common_mask & signal_ok
     if not np.any(solve_mask):
         raise ValueError("No common-valid pixels have enough signal for a qualitative preview.")
-    rps_root = Path(__file__).resolve().parents[3] / "third-party/RobustPhotometricStereo"
+    rps_root = repo_root() / "third-party/RobustPhotometricStereo"
     normals, elapsed = solve_with_rps(import_rps_class(rps_root), measurements,
                                       NOMINAL_LIGHT_DIRECTIONS, solve_mask, "l2")
     nonzero = np.isfinite(normals).all(axis=2) & (np.linalg.norm(normals, axis=2) > NORMAL_EPSILON)

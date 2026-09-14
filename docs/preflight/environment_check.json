@@ -1,5 +1,5 @@
 {
-  "created_at": "2026-09-08T07:34:57.916768+00:00",
+  "created_at": "2026-09-08T13:11:50.458793+00:00",
   "root": "D:\\Visual studio code\\FabLoop_VJSS26",
   "python": "3.12.13 (main, Mar 24 2026, 22:57:53) [MSC v.1944 64 bit (AMD64)]",
   "executable": "D:\\Visual studio code\\FabLoop_VJSS26\\.venv\\Scripts\\python.exe",
@@ -8,9 +8,9 @@
   "environment_valid": true,
   "pipeline_ready": false,
   "status_counts": {
-    "PASS": 53,
-    "BLOCKED_DATA": 20,
-    "INFO": 4
+    "PASS": 56,
+    "INFO": 4,
+    "BLOCKED_DATA": 18
   },
   "scope": "Import/signature/config/file checks only; no training or inference",
   "limitations": [
@@ -200,6 +200,14 @@
       "details": {
         "file": "D:\\Visual studio code\\FabLoop_VJSS26\\.venv\\Lib\\site-packages\\timm\\__init__.py",
         "version": "1.0.28"
+      }
+    },
+    {
+      "name": "import.fvcore.nn",
+      "status": "PASS",
+      "details": {
+        "file": "D:\\Visual studio code\\FabLoop_VJSS26\\.venv\\Lib\\site-packages\\fvcore\\nn\\__init__.py",
+        "version": "0.1.5.post20221221"
       }
     },
     {
@@ -416,9 +424,9 @@
     },
     {
       "name": "configs\\efficientad.yaml.dataset_root",
-      "status": "BLOCKED_DATA",
+      "status": "PASS",
       "path": "D:\\Visual studio code\\FabLoop_VJSS26\\data\\visa",
-      "exists": false
+      "exists": true
     },
     {
       "name": "configs\\efficientad.yaml.imagenette",
@@ -476,33 +484,11 @@
     },
     {
       "name": "configs\\efficientad.yaml.csv_referenced_files",
-      "status": "BLOCKED_DATA",
-      "missing_images": 4416,
-      "missing_masks": 400,
-      "missing_image_preview": [
-        "pcb1/Data/Images/Normal/0499.JPG",
-        "pcb1/Data/Images/Normal/0165.JPG",
-        "pcb1/Data/Images/Normal/0650.JPG",
-        "pcb1/Data/Images/Normal/0154.JPG",
-        "pcb1/Data/Images/Normal/0713.JPG",
-        "pcb1/Data/Images/Normal/0083.JPG",
-        "pcb1/Data/Images/Normal/0067.JPG",
-        "pcb1/Data/Images/Normal/0341.JPG",
-        "pcb1/Data/Images/Normal/0524.JPG",
-        "pcb1/Data/Images/Normal/0141.JPG"
-      ],
-      "missing_mask_preview": [
-        "pcb1/Data/Masks/Anomaly/000.png",
-        "pcb1/Data/Masks/Anomaly/001.png",
-        "pcb1/Data/Masks/Anomaly/002.png",
-        "pcb1/Data/Masks/Anomaly/003.png",
-        "pcb1/Data/Masks/Anomaly/004.png",
-        "pcb1/Data/Masks/Anomaly/005.png",
-        "pcb1/Data/Masks/Anomaly/006.png",
-        "pcb1/Data/Masks/Anomaly/007.png",
-        "pcb1/Data/Masks/Anomaly/008.png",
-        "pcb1/Data/Masks/Anomaly/009.png"
-      ]
+      "status": "PASS",
+      "missing_images": 0,
+      "missing_masks": 0,
+      "missing_image_preview": [],
+      "missing_mask_preview": []
     },
     {
       "name": "configs\\pushpins.yaml.dataset_root",

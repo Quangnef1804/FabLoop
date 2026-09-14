@@ -1,8 +1,10 @@
-# EfficientAD-S slimming: kiểm tra mức độ sẵn sàng
+# EfficientAD-S slimming: readiness và screening
 
-Ngày kiểm tra: 2026-09-08. Phạm vi: source, cấu hình, môi trường và các điểm tích hợp cần thiết trước khi huấn luyện. Chưa huấn luyện Student/AE, chưa đánh giá dataset và chưa có kết quả độ chính xác của biến thể slim.
+Ngày preflight: 2026-09-08. Cập nhật screening: 2026-09-09.
 
-**Trạng thái hiện tại:** Bước 1–4 đã hoàn thành. **Slim-0.5 candidate** đã có kiến trúc Student/AE giảm width nội bộ, vượt mục tiêu Student ≥40% ít params / ≥30% ít FLOPs được fvcore hỗ trợ, và vượt qua 19 kiểm tra kiến trúc/gradient/map/reload/shape/compression gate. Đây chưa phải kiến trúc cuối cùng; chưa nạp Teacher pretrained, chưa có optimizer step hoặc kết quả chất lượng/latency. Runtime hiện tại vẫn dùng baseline chính thức; factory/config, provenance checkpoint, output riêng và dữ liệu thí nghiệm còn cần tích hợp trước khi train.
+**Trạng thái hiện tại:** Bước 1–6 đã hoàn thành cho **Slim-0.5 candidate**. Runtime chọn Slim theo config, giữ Teacher pretrained frozen, dùng checkpoint architecture-aware, output riêng và nguyên logic loss/anomaly map của Anomalib. VisA `pcb1`–`pcb4`, seed 42 đã chạy đủ 70.000 iteration/category; cả bốn health report và validator đều PASS. Mean image AUROC là 0,9582, minimum category AUROC 0,9293 và mean recall@FPR10 0,87. Xem [báo cáo screening](../results/efficientad_slim_05_screening_seed42.md).
+
+Các phần từ mục 1 trở xuống ghi lại audit/preflight trước khi tích hợp runtime; những câu mô tả “chưa train” hoặc “runtime còn dùng baseline” trong phần lịch sử đã được thay thế bởi kết quả screening ở trên.
 
 ## Bước 3: shape gate đã đạt
 

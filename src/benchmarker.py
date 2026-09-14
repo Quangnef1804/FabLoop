@@ -59,6 +59,7 @@ def benchmark(
         "created_at": datetime.now(timezone.utc).isoformat(),
         "category": category,
         "seed": seed,
+        "architecture": payload["architecture"],
         "device": str(device),
         "batch_size": 1,
         "warmup_iterations": warmup,

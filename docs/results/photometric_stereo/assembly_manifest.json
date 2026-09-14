@@ -1,0 +1,100 @@
+{
+  "accuracy_dirs": [
+    "D:\\Visual studio code\\FabLoop_VJSS26\\outputs\\photometric_stereo\\matrix_accuracy\\l2",
+    "D:\\Visual studio code\\FabLoop_VJSS26\\outputs\\photometric_stereo\\matrix_accuracy\\l1",
+    "D:\\Visual studio code\\FabLoop_VJSS26\\outputs\\photometric_stereo\\matrix_accuracy\\ps_fcn",
+    "D:\\Visual studio code\\FabLoop_VJSS26\\outputs\\photometric_stereo\\matrix_accuracy\\sdm_unips",
+    "D:\\Visual studio code\\FabLoop_VJSS26\\outputs\\photometric_stereo\\matrix_accuracy_lights064\\l2",
+    "D:\\Visual studio code\\FabLoop_VJSS26\\outputs\\photometric_stereo\\matrix_accuracy_lights064\\l1",
+    "D:\\Visual studio code\\FabLoop_VJSS26\\outputs\\photometric_stereo\\matrix_accuracy_lights064\\ps_fcn",
+    "D:\\Visual studio code\\FabLoop_VJSS26\\outputs\\photometric_stereo\\matrix_accuracy_lights064\\sdm_unips"
+  ],
+  "runtime_dir": "D:\\Visual studio code\\FabLoop_VJSS26\\outputs\\photometric_stereo\\matrix_runtime",
+  "cases": 240,
+  "status_counts": {
+    "ok": 210,
+    "unsupported_oom": 30
+  },
+  "runtime_measured_cases": 30,
+  "runtime_pass_mae_mismatches": [],
+  "gpu_memory_spill_cases": [
+    [
+      "ball",
+      "sdm_unips",
+      16
+    ],
+    [
+      "bear",
+      "sdm_unips",
+      16
+    ],
+    [
+      "buddha",
+      "sdm_unips",
+      16
+    ],
+    [
+      "cat",
+      "sdm_unips",
+      16
+    ],
+    [
+      "cow",
+      "sdm_unips",
+      16
+    ],
+    [
+      "goblet",
+      "sdm_unips",
+      16
+    ],
+    [
+      "harvest",
+      "sdm_unips",
+      16
+    ],
+    [
+      "pot1",
+      "sdm_unips",
+      16
+    ],
+    [
+      "pot2",
+      "sdm_unips",
+      16
+    ],
+    [
+      "reading",
+      "sdm_unips",
+      16
+    ]
+  ],
+  "runtime_caveat_cases": [
+    [
+      "harvest",
+      "l1",
+      96,
+      "possible_partial_throttle"
+    ],
+    [
+      "pot1",
+      "l1",
+      4,
+      "screen_locked_e_core_throttle"
+    ],
+    [
+      "pot1",
+      "l1",
+      32,
+      "screen_locked_e_core_throttle"
+    ],
+    [
+      "pot1",
+      "l1",
+      96,
+      "screen_locked_e_core_throttle"
+    ]
+  ],
+  "runtime_table": "D:\\Visual studio code\\FabLoop_VJSS26\\outputs\\photometric_stereo\\runtime_summary.csv",
+  "figures": 184
+}

@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-09-10T21:59:37.641406+00:00",
+  "experiment": "VisA architecture screening",
+  "seed": 42,
+  "target_fpr": 0.1,
+  "delta_definition": "delta_auroc_pp = (AUROC_slim - AUROC_old) * 100",
+  "screening_gate": {
+    "student_parameters_reduction_min_fraction": 0.4,
+    "student_supported_flops_reduction_min_fraction": 0.3,
+    "max_auroc_degradation_pp_per_category": 2.0,
+    "student_parameters_reduction_fraction": 0.5651789195836707,
+    "student_supported_flops_reduction_fraction": 0.6233133777969998,
+    "parameters_passed": true,
+    "flops_passed": true,
+    "quality_passed": false,
+    "passed": false
+  },
+  "final_pcba_jetson_target": {
+    "max_auroc_degradation_pp": 1.0,
+    "status": "NOT_EVALUATED_BY_VISA_SCREENING"
+  },
+  "categories": [
+    {
+      "category": "pcb1",
+      "auroc_old": 0.9506000000000001,
+      "auroc_slim": 0.9293,
+      "delta_auroc_pp": -2.1300000000000097,
+      "degradation_pp": 2.1300000000000097,
+      "screening_quality_passed": false,
+      "test_sample_count": 200,
+      "baseline_metrics": "outputs\\efficientad_baseline_screening\\pcb1\\predictions\\seed_42\\metrics.json",
+      "slim_metrics": "outputs\\efficientad_slim\\slim_0_5\\pcb1\\predictions\\seed_42\\metrics.json"
+    },
+    {
+      "category": "pcb2",
+      "auroc_old": 0.9617,
+      "auroc_slim": 0.9454,
+      "delta_auroc_pp": -1.6299999999999981,
+      "degradation_pp": 1.6299999999999981,
+      "screening_quality_passed": true,
+      "test_sample_count": 200,
+      "baseline_metrics": "outputs\\efficientad_baseline_screening\\pcb2\\predictions\\seed_42\\metrics.json",
+      "slim_metrics": "outputs\\efficientad_slim\\slim_0_5\\pcb2\\predictions\\seed_42\\metrics.json"
+    },
+    {
+      "category": "pcb3",
+      "auroc_old": 0.9795049504950495,
+      "auroc_slim": 0.97,
+      "delta_auroc_pp": -0.9504950495049513,
+      "degradation_pp": 0.9504950495049513,
+      "screening_quality_passed": true,
+      "test_sample_count": 201,
+      "baseline_metrics": "outputs\\efficientad_baseline_screening\\pcb3\\predictions\\seed_42\\metrics.json",
+      "slim_metrics": "outputs\\efficientad_slim\\slim_0_5\\pcb3\\predictions\\seed_42\\metrics.json"
+    },
+    {
+      "category": "pcb4",
+      "auroc_old": 0.988019801980198,
+      "auroc_slim": 0.988019801980198,
+      "delta_auroc_pp": 0.0,
+      "degradation_pp": 0.0,
+      "screening_quality_passed": true,
+      "test_sample_count": 201,
+      "baseline_metrics": "outputs\\efficientad_baseline_screening\\pcb4\\predictions\\seed_42\\metrics.json",
+      "slim_metrics": "outputs\\efficientad_slim\\slim_0_5\\pcb4\\predictions\\seed_42\\metrics.json"
+    }
+  ],
+  "mean": {
+    "auroc_old": 0.9699561881188119,
+    "auroc_slim": 0.9581799504950494,
+    "delta_auroc_pp": -1.1776237623762453
+  },
+  "provenance": {
+    "baseline_root": "outputs\\efficientad_baseline_screening",
+    "slim_root": "outputs\\efficientad_slim\\slim_0_5",
+    "compression_profile": "docs\\preflight\\efficientad_slim_05_profile.json",
+    "comparison_scope": "Existing image_level_auroc from src/evaluator.py; no new metric"
+  }
+}

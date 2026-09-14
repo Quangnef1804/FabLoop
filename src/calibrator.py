@@ -66,6 +66,7 @@ def calibrate(
         "created_at": datetime.now(timezone.utc).isoformat(),
         "category": category,
         "seed": seed,
+        "architecture": payload["architecture"],
         "source": str(config["data"]["calibration_source"]),
         "sample_count": len(calibration_ids),
         "sample_ids": calibration_ids,

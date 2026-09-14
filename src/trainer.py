@@ -83,6 +83,19 @@ def build_from_checkpoint(
     if payload.get("category") != category or int(payload.get("seed", -1)) != seed:
         raise ValueError(f"Checkpoint provenance does not match category={category}, seed={seed}")
     wrapper = EfficientAdWrapper(config, device)
+    architecture = payload.get("architecture")
+    if not isinstance(architecture, dict) or not architecture.get("id"):
+        raise ValueError("Checkpoint is missing required architecture metadata")
+    if architecture["id"] != wrapper.architecture_id:
+        raise ValueError(
+            f"Checkpoint architecture {architecture['id']!r} does not match "
+            f"configured architecture {wrapper.architecture_id!r}"
+        )
+    if architecture != wrapper.architecture:
+        raise ValueError(
+            "Checkpoint architecture metadata does not match the current implementation; "
+            "refusing to load weights under changed source or channel definitions"
+        )
     wrapper.load_core_state(payload["model_state_dict"])
     expected_checksum = payload.get("teacher_checksum_before")
     if expected_checksum and wrapper.teacher_checksum != expected_checksum:
@@ -104,11 +117,12 @@ def _checkpoint_payload(
 ) -> dict[str, Any]:
     checksum_after = module_checksum(wrapper.core.teacher)
     return {
-        "format_version": 1,
+        "format_version": 2,
         "category": category,
         "seed": seed,
         "iteration": iteration,
         "config": config,
+        "architecture": wrapper.architecture,
         "model_state_dict": {name: value.detach().cpu() for name, value in wrapper.core.state_dict().items()},
         "optimizer_state_dict": optimizer.state_dict(),
         "scheduler_state_dict": scheduler.state_dict(),
@@ -185,6 +199,7 @@ def train(
     )
 
     log_path = checkpoint_dir / f"losses_seed_{seed}.csv"
+    health_path = checkpoint_dir / f"training_health_seed_{seed}.json"
     iterations = int(train_config["iterations"])
     checkpoint_interval = int(train_config["checkpoint_interval"])
     progress_refresh_interval = int(train_config.get("progress_refresh_interval", 10))
@@ -194,6 +209,7 @@ def train(
     imagenette_iterator = iter(wrapper.lightning_model.imagenet_loader)
     wrapper.core.train()
     wrapper.enforce_teacher_frozen()
+    total_loss_history: list[float] = []
 
     with log_path.open("w", encoding="utf-8", newline="") as stream:
         writer = csv.DictWriter(
@@ -226,7 +242,40 @@ def train(
             # Architecture, hard-feature loss, AE loss, ST-AE loss and penalty are all Anomalib-owned.
             local_loss, ae_loss, stae_loss = wrapper.core(image, batch_imagenet=imagenette)
             total_loss = local_loss + ae_loss + stae_loss
+            losses = {
+                "local_loss": local_loss,
+                "autoencoder_loss": ae_loss,
+                "student_autoencoder_loss": stae_loss,
+                "total_loss": total_loss,
+            }
+            if not all(bool(torch.isfinite(value).all()) for value in losses.values()):
+                failure = {
+                    "status": "FAIL",
+                    "reason": "nonfinite_loss",
+                    "iteration": iteration,
+                    "architecture": wrapper.architecture,
+                    "losses": {name: float(value.detach()) for name, value in losses.items()},
+                }
+                health_path.write_text(json.dumps(failure, indent=2), encoding="utf-8")
+                raise FloatingPointError(f"NaN/Inf loss detected at iteration {iteration}")
             total_loss.backward()
+            if iteration == 1 or iteration % 100 == 0:
+                nonfinite_gradients = [
+                    name
+                    for name, parameter in list(wrapper.core.student.named_parameters())
+                    + list(wrapper.core.ae.named_parameters())
+                    if parameter.grad is not None and not bool(torch.isfinite(parameter.grad).all())
+                ]
+                if nonfinite_gradients:
+                    failure = {
+                        "status": "FAIL",
+                        "reason": "nonfinite_gradient",
+                        "iteration": iteration,
+                        "architecture": wrapper.architecture,
+                        "parameters": nonfinite_gradients,
+                    }
+                    health_path.write_text(json.dumps(failure, indent=2), encoding="utf-8")
+                    raise FloatingPointError(f"NaN/Inf gradient detected at iteration {iteration}")
             optimizer.step()
             scheduler.step()
             wrapper.enforce_teacher_frozen()
@@ -235,6 +284,7 @@ def train(
             ae_value = float(ae_loss.detach())
             stae_value = float(stae_loss.detach())
             total_value = float(total_loss.detach())
+            total_loss_history.append(total_value)
             learning_rate = float(optimizer.param_groups[0]["lr"])
             writer.writerow(
                 {
@@ -290,4 +340,25 @@ def train(
     if payload["teacher_checksum_before"] != payload["teacher_checksum_after"]:
         raise RuntimeError("Teacher changed during training; checkpoint was not accepted")
     save_checkpoint(final_path, payload)
+    reloaded, reloaded_payload, _ = build_from_checkpoint(config, category, seed, device)
+    reload_checksum = module_checksum(reloaded.core.teacher)
+    if reload_checksum != payload["teacher_checksum_before"]:
+        raise RuntimeError("Final checkpoint reload changed the Teacher checksum")
+    window = min(1000, len(total_loss_history))
+    initial_mean = float(np.mean(total_loss_history[:window]))
+    final_mean = float(np.mean(total_loss_history[-window:]))
+    health = {
+        "status": "PASS",
+        "architecture": reloaded_payload["architecture"],
+        "iterations": iterations,
+        "all_losses_finite": bool(np.isfinite(total_loss_history).all()),
+        "checkpoint_strict_reload": True,
+        "teacher_checksum_unchanged": reload_checksum == payload["teacher_checksum_after"],
+        "loss_window": window,
+        "initial_total_loss_mean": initial_mean,
+        "final_total_loss_mean": final_mean,
+        "final_to_initial_ratio": final_mean / initial_mean if initial_mean else None,
+        "loss_decreased": final_mean < initial_mean,
+    }
+    health_path.write_text(json.dumps(health, indent=2), encoding="utf-8")
     return final_path

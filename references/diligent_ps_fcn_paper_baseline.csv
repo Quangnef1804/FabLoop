@@ -1,0 +1,11 @@
+object,solver,image_count,mae_deg,source_url,notes
+ball,ps_fcn,96,2.82,https://arxiv.org/abs/1807.08696,"PS-FCN ECCV 2018 Table 2, row PS-FCN (B+S+32, 96): trained Blobby+Sculpture with 32 per-sample inputs, tested with all 96 images. Paper average 8.39."
+cat,ps_fcn,96,6.16,https://arxiv.org/abs/1807.08696,"PS-FCN ECCV 2018 Table 2, row PS-FCN (B+S+32, 96): trained Blobby+Sculpture with 32 per-sample inputs, tested with all 96 images. Paper average 8.39."
+pot1,ps_fcn,96,7.13,https://arxiv.org/abs/1807.08696,"PS-FCN ECCV 2018 Table 2, row PS-FCN (B+S+32, 96): trained Blobby+Sculpture with 32 per-sample inputs, tested with all 96 images. Paper average 8.39."
+bear,ps_fcn,96,7.55,https://arxiv.org/abs/1807.08696,"PS-FCN ECCV 2018 Table 2, row PS-FCN (B+S+32, 96): trained Blobby+Sculpture with 32 per-sample inputs, tested with all 96 images. Paper average 8.39."
+pot2,ps_fcn,96,7.25,https://arxiv.org/abs/1807.08696,"PS-FCN ECCV 2018 Table 2, row PS-FCN (B+S+32, 96): trained Blobby+Sculpture with 32 per-sample inputs, tested with all 96 images. Paper average 8.39."
+buddha,ps_fcn,96,7.91,https://arxiv.org/abs/1807.08696,"PS-FCN ECCV 2018 Table 2, row PS-FCN (B+S+32, 96): trained Blobby+Sculpture with 32 per-sample inputs, tested with all 96 images. Paper average 8.39."
+goblet,ps_fcn,96,8.60,https://arxiv.org/abs/1807.08696,"PS-FCN ECCV 2018 Table 2, row PS-FCN (B+S+32, 96): trained Blobby+Sculpture with 32 per-sample inputs, tested with all 96 images. Paper average 8.39."
+reading,ps_fcn,96,13.33,https://arxiv.org/abs/1807.08696,"PS-FCN ECCV 2018 Table 2, row PS-FCN (B+S+32, 96): trained Blobby+Sculpture with 32 per-sample inputs, tested with all 96 images. Paper average 8.39."
+cow,ps_fcn,96,7.33,https://arxiv.org/abs/1807.08696,"PS-FCN ECCV 2018 Table 2, row PS-FCN (B+S+32, 96): trained Blobby+Sculpture with 32 per-sample inputs, tested with all 96 images. Paper average 8.39."
+harvest,ps_fcn,96,15.85,https://arxiv.org/abs/1807.08696,"PS-FCN ECCV 2018 Table 2, row PS-FCN (B+S+32, 96): trained Blobby+Sculpture with 32 per-sample inputs, tested with all 96 images. Paper average 8.39."

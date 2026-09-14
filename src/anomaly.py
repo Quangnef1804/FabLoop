@@ -24,6 +24,7 @@ from data import (
     manifest_path_for_category,
 )
 from evaluator import evaluate
+from model import EfficientAdWrapper
 from trainer import train
 from validator import validate
 
@@ -91,6 +92,9 @@ def preflight(config: dict[str, Any], category: str, device: torch.device) -> di
             raise FileNotFoundError(f"SAM checkpoint not found: {sam_checkpoint}")
     splits = build_official_splits(config, category, write_manifest=True)
     manifest_path = manifest_path_for_category(config, category)
+    wrapper = EfficientAdWrapper(config, device)
+    image_size = tuple(int(value) for value in config["data"]["image_size"])
+    shape_report = wrapper.verify_feature_shapes(image_size)
     result = {
         "status": "PASS",
         "dataset": name,
@@ -100,6 +104,8 @@ def preflight(config: dict[str, Any], category: str, device: torch.device) -> di
         "anomalib_version": __import__("anomalib").__version__,
         "split_manifest": str(manifest_path),
         "counts": splits.manifest["counts"],
+        "architecture": wrapper.architecture,
+        "shape_gate": shape_report,
         "imagenette": {
             "path": config["imagenette"]["root"],
             "status": "READY" if Path(config["imagenette"]["root"]).is_dir() else "DOWNLOAD_ON_TRAIN",

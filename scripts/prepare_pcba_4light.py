@@ -9,7 +9,7 @@ import sys
 WORKSPACE = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(WORKSPACE / "src"))
 
-from fabloop.photometric_stereo.pcba_prepare import prepare_inventory
+from photometric_stereo.pcba_prepare import prepare_inventory
 
 
 def main(argv: list[str] | None = None) -> int:

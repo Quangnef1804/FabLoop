@@ -11,7 +11,7 @@ import numpy as np
 
 from .diligent_validate import (
     SOLVER_ATTRS, import_cv2, import_rps_class, normal_to_rgb,
-    normals_to_height_frankot_chellappa, solve_with_rps,
+    normals_to_height_frankot_chellappa, repo_root, solve_with_rps,
 )
 
 LIGHT_ORDER = ("F", "B", "L", "R")
@@ -127,7 +127,7 @@ def process_capture(
         observations.append((image / intensity.reshape(1, 1, 3)).mean(axis=2).reshape(-1))
     measurements = np.stack(observations, axis=1)
     rps_root = (Path(rps_root) if rps_root is not None else
-                Path(__file__).resolve().parents[3] / "third-party/RobustPhotometricStereo").resolve()
+                repo_root() / "third-party/RobustPhotometricStereo").resolve()
     RPS = import_rps_class(rps_root)
     normal, elapsed = solve_with_rps(RPS, measurements, directions, mask, solver)
     if not np.all(np.isfinite(normal[mask])) or np.any(np.linalg.norm(normal[mask], axis=1) <= 1.0e-8):

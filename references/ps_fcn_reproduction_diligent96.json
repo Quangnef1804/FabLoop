@@ -1,0 +1,71 @@
+{
+  "source": "https://arxiv.org/abs/1807.08696",
+  "table": "Table 2",
+  "row": "PS-FCN (B+S+32, 96)",
+  "paper_average_deg": 8.39,
+  "measured_average_deg": 8.399,
+  "max_abs_delta_deg": 0.391,
+  "per_object": [
+    {
+      "object": "ball",
+      "paper_mae_deg": 2.82,
+      "measured_mae_deg": 2.429,
+      "delta_deg": -0.391
+    },
+    {
+      "object": "cat",
+      "paper_mae_deg": 6.16,
+      "measured_mae_deg": 5.985,
+      "delta_deg": -0.175
+    },
+    {
+      "object": "pot1",
+      "paper_mae_deg": 7.13,
+      "measured_mae_deg": 6.886,
+      "delta_deg": -0.244
+    },
+    {
+      "object": "bear",
+      "paper_mae_deg": 7.55,
+      "measured_mae_deg": 7.39,
+      "delta_deg": -0.16
+    },
+    {
+      "object": "pot2",
+      "paper_mae_deg": 7.25,
+      "measured_mae_deg": 7.566,
+      "delta_deg": 0.316
+    },
+    {
+      "object": "buddha",
+      "paper_mae_deg": 7.91,
+      "measured_mae_deg": 8.124,
+      "delta_deg": 0.214
+    },
+    {
+      "object": "goblet",
+      "paper_mae_deg": 8.6,
+      "measured_mae_deg": 8.606,
+      "delta_deg": 0.006
+    },
+    {
+      "object": "reading",
+      "paper_mae_deg": 13.33,
+      "measured_mae_deg": 13.583,
+      "delta_deg": 0.253
+    },
+    {
+      "object": "cow",
+      "paper_mae_deg": 7.33,
+      "measured_mae_deg": 7.55,
+      "delta_deg": 0.22
+    },
+    {
+      "object": "harvest",
+      "paper_mae_deg": 15.85,
+      "measured_mae_deg": 15.866,
+      "delta_deg": 0.016
+    }
+  ],
+  "note": "Measured with per-object calibrated light_directions.txt; upstream hardcodes one shared light matrix."
+}

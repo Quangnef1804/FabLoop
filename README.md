@@ -13,17 +13,33 @@ python -m pip check
 python scripts/check_environment.py
 ```
 
-Config mặc định dùng CSV đã có tại `third-party/spot-diff/split_csv/1cls.csv`. Các thư mục `data/visa`, `data/mvtec_ad` và `data/mvtec_loco` hiện chưa có; kiểm tra môi trường sẽ báo `BLOCKED_DATA`. Hai thư mục PCBA hiện có cần adapter và quy tắc nhãn/split riêng, chưa thể dùng trực tiếp với config VisA. Xem [báo cáo môi trường](docs/preflight/README.md).
+Config mặc định dùng CSV đã có tại `third-party/spot-diff/split_csv/1cls.csv`. `data/visa` đã có đúng bốn category `pcb1`–`pcb4`; kiểm tra dataset root, CSV và toàn bộ file được CSV tham chiếu đều PASS. `data/mvtec_ad` và `data/mvtec_loco` vẫn chưa có nên các config tương ứng còn báo `BLOCKED_DATA`. Hai thư mục PCBA 4 đèn cần adapter và quy tắc nhãn/split riêng, không dùng thay cho VisA. Xem [báo cáo môi trường](docs/preflight/README.md) và [provenance VisA](references/visa_source.json).
+
+## Cấu trúc source
+
+```text
+src/
+├── photometric_stereo/  # DiLiGenT, xử lý PCBA và preview
+├── models/              # Các implementation EfficientAD
+├── anomaly.py           # CLI pipeline anomaly detection
+├── data.py
+├── model.py
+├── trainer.py
+└── ...                  # Evaluator và các module pipeline hiện có
+```
+
+Hai package `photometric_stereo` và `models` nằm trực tiếp dưới `src/`; các lệnh trong `scripts/` vẫn là entrypoint cho photometric stereo.
 
 ## Photometric stereo và PCBA 4 đèn
 
-Đã merge phần photometric stereo từ thư mục con `FabLoop` vào `src/fabloop/photometric_stereo/`, chuyển baseline vào `references/`, giữ `.venv` và requirements chính. Dependency nghiên cứu nằm tại `third-party/RobustPhotometricStereo`. [Quy trình DiLiGenT và phân tích review](docs/photometric_stereo_diligent.md) phân biệt kiểm định có ground truth với [xử lý PCBA](docs/photometric_stereo_pcba.md).
+Đã merge phần photometric stereo từ thư mục con `FabLoop` vào `src/photometric_stereo/`, chuyển baseline vào `references/`, giữ `.venv` và requirements chính. Dependency nghiên cứu nằm tại `third-party/RobustPhotometricStereo`. [Pipeline benchmark DiLiGenT](docs/photometric_stereo_benchmark.md) so sánh L2/L1/PS-FCN/SDM-UniPS theo 4/8/16/32/96 đèn; [quy trình DiLiGenT](docs/photometric_stereo_diligent.md) ghi chi tiết validation solver và [xử lý PCBA](docs/photometric_stereo_pcba.md) dành cho dữ liệu không có normal ground truth.
 
 Đã kiểm kê **34 nhóm / 170 ảnh edited và 170 ảnh gốc**: đọc được toàn bộ, nhưng **33 nhóm edited lệch kích thước giữa bốn đèn**. Hiện chưa có nhãn normal/anomaly, split, mask và calibration đèn. Manifest ở `data/processed/pcba_4light/inventory.json`; điền thông tin đã xác minh vào `data/processed/pcba_4light/labels.json` (không bị ghi đè khi chạy lại).
 
 ```powershell
 .\.venv\Scripts\python.exe scripts\prepare_pcba_4light.py
 .\.venv\Scripts\python.exe scripts\validate_diligent.py --help
+.\.venv\Scripts\python.exe scripts\benchmark_photometric_stereo.py --preflight-only
 .\.venv\Scripts\python.exe scripts\process_pcba_photometric.py --help
 ```
 
@@ -55,7 +71,7 @@ python scripts/profile_efficientad_slim.py
 
 Bảy test đã đạt, gồm shape/geometry, loss backward, Teacher frozen, map parity và strict state-dict roundtrip; không có optimizer step. Với input CPU float32 `1×3×256×256`, Student còn **1.855.552 params / 7,625 GFLOPs được fvcore hỗ trợ**, giảm **56,52% / 62,33%**, đạt mốc Student ≥40% / ≥30%. Tổng **EfficientAD core (Teacher + Student + AE)** còn 4.879.936 params / 23,717 GFLOPs, giảm 39,44% / 37,51%. Tổng này chỉ tính forward của ba mạng feature, chưa gồm anomaly-map postprocessing, SAM3 hoặc 772 phần tử calibration; operator coverage và quy ước một multiply-add = một FLOP nằm trong [kết quả profile](docs/preflight/efficientad_slim_05_profile.json).
 
-Slim-0.5 chưa phải kiến trúc cuối cùng. Các kiểm tra dùng trọng số khởi tạo ngẫu nhiên, chưa nạp Teacher pretrained, chưa huấn luyện hoặc đo chất lượng/latency. Runtime `src/model.py`, trainer và config vẫn dùng baseline. Xem [cách khởi tạo candidate độc lập](src/models/efficientad_slim/README.md) và [các phần tích hợp còn lại trước khi train](docs/preflight/efficientad_slim_readiness.md).
+Slim-0.5 vẫn là candidate screening. Runtime `src/model.py` đã chọn kiến trúc theo config, checkpoint format v2 lưu và kiểm architecture/source hash, trainer giữ Teacher frozen và dùng nguyên loss EfficientAD của Anomalib. Candidate đã được train/evaluate trên VisA `pcb1`–`pcb4`, seed 42; xem [báo cáo screening](docs/results/efficientad_slim_05_screening_seed42.md) và [artifact JSON](docs/results/efficientad_slim_05_screening_seed42.json).
 
 ## Bước 3 — Shape gate bắt buộc trước training
 
@@ -81,7 +97,7 @@ A - S_A       [1,384,56,56] PASS
 
 Gate yêu cầu shape bằng nhau chính xác trước khi trừ, không chấp nhận broadcasting. `src/trainer.py` gọi gate bắt buộc trước nạp Teacher pretrained, chuẩn bị Imagenette, thống kê feature và tạo optimizer. Kết quả mỗi lần chuẩn bị train được ghi vào `checkpoints/shape_check_seed_<seed>.json`; lỗi shape ghi FAIL rồi dừng. Gate bảo toàn state, mode và RNG; không sửa loss.
 
-[Báo cáo CPU](docs/preflight/efficientad_slim_05_shapes.json) và [báo cáo CUDA](docs/preflight/efficientad_slim_05_shapes_cuda.json) chỉ xác nhận tính tương thích shape, chưa phải bằng chứng chất lượng sau train. Factory training hiện vẫn chọn baseline; khi nối Slim vào factory, cùng gate sẽ kiểm tra core đó. Kiểm tra toàn bộ tests, gồm cả compression gate ở Bước 4:
+[Báo cáo CPU](docs/preflight/efficientad_slim_05_shapes.json) và [báo cáo CUDA](docs/preflight/efficientad_slim_05_shapes_cuda.json) xác nhận tính tương thích shape độc lập. Runtime cũng chạy gate này trên core được config chọn trước khi train. Kiểm tra toàn bộ tests, gồm cả compression gate ở Bước 4:
 
 ```powershell
 python -m unittest discover -s tests -p "test_*.py" -v
@@ -108,6 +124,20 @@ Lệnh lưu [báo cáo đầy đủ](docs/preflight/efficientad_slim_05_profile.
 **19 tests đã PASS**, gồm 5 tests mới cho ngưỡng Student và exit code: đạt đúng ngưỡng được PASS; thiếu một ngưỡng vẫn FAIL dù tổng pipeline giảm mạnh; cả PASS/FAIL đều lưu báo cáo. Xem [kết quả kiểm tra gate](docs/preflight/efficientad_compression_gate_validation.json).
 
 FLOPs trong bảng là **các operator được fvcore hỗ trợ** ở forward của ba mạng feature. `avg_pool2d`, phép trừ/chia chuẩn hóa chưa được bộ đếm mặc định tính; các operator bỏ qua và breakdown từng module đều được ghi trong JSON. Tổng ba mạng chưa gồm anomaly-map postprocessing, SAM3 và 772 phần tử calibration; tính cả calibration thì Params gốc/Slim là 8.058.628 / 4.880.708. Đây chưa phải phép đo latency hoặc chất lượng sau train.
+
+## Bước 5–6 — Architecture screening VisA PCB, seed 42
+
+Đã train tuần tự `pcb1` trước, sau khi mọi gate PASS mới chạy `pcb2`–`pcb4`. Mỗi category chạy 70.000 iteration với Teacher pretrained frozen, normal-only training, hard feature loss, Imagenette penalty, augmentation cho AE branch, `dTS + dTA + dSA` và quantile calibration hiện có. Không viết lại training loop hoặc loss.
+
+| Category | Loss đầu → cuối | Image AUROC | Pixel AUROC | AUPRO | Recall@FPR10 | FPR thực | Health/validator |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |
+| pcb1 | 11,989 → 1,319 | 0,9293 | 0,9896 | 0,9132 | 0,76 | 0,0600 | PASS / PASS |
+| pcb2 | 9,309 → 0,978 | 0,9454 | 0,9859 | 0,9095 | 0,85 | 0,1000 | PASS / PASS |
+| pcb3 | 10,083 → 1,067 | 0,9700 | 0,9920 | 0,9194 | 0,87 | 0,0792 | PASS / PASS |
+| pcb4 | 11,536 → 1,308 | 0,9880 | 0,9597 | 0,7288 | 1,00 | 0,0792 | PASS / PASS |
+| **Trung bình** | — | **0,9582** | **0,9818** | **0,8677** | **0,87** | — | **PASS** |
+
+Không có NaN/Inf; checkpoint cuối của cả bốn category reload strict được và Teacher checksum không đổi. `recall@FPR10` dùng operating point chọn từ test để screening kiến trúc, không phải threshold triển khai. Threshold lấy riêng từ validation-normal cho FPR test 0,15–0,21, nên cần hiệu chỉnh thêm trước deployment. SAM3 tắt trong screening vì checkpoint 3,45 GB không thể chạy an toàn cùng pipeline trên GPU 4 GB; các metrics dùng anomaly map EfficientAD không đổi. Chi tiết nằm trong [báo cáo screening seed 42](docs/results/efficientad_slim_05_screening_seed42.md).
 
 Không dùng test để tạo validation, tính quantile hoặc chọn threshold. Với VisA và MVTec AD, `data.calibration_ratio` giữ lại một phần deterministic của **official train-normal** làm validation-normal. MVTec LOCO không dùng ratio mà lấy nguyên official `validation/good`; official test rows luôn được giữ nguyên.
 
